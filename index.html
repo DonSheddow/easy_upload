@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    <script>
+        window.onload = function() {
+            document.getElementById('mybutton').onclick = function() {
+                submit();
+            }
+        }
+        function submit() {
+            let file = document.getElementById('fileupload').files[0];
+            file.arrayBuffer().then(data => {
+                fetch("/upload" + Math.random(), {method: "POST", body: data})
+                document.write("submitted!");
+            }).catch(e => {
+                document.write("error! " + e);
+            });
+        }
+    </script>
+    <form id="uploadbanner" method="POST">
+       <input id="fileupload" name="myfile" type="file" accept="image/png, image/jpeg" />
+    </form>
+    <input id="mybutton" type="button" value="upload!"/>
+    </body>
+</html>
