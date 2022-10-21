@@ -7,7 +7,7 @@ except ImportError:
 
 class HTTPRequestHandler(server.SimpleHTTPRequestHandler):
     def do_POST(self):
-        filename = os.path.basename(self.path)
+        filename = os.path.basename(self.path).replace('\\', '').replace('/', '')
 
         # Don't overwrite files
         if os.path.exists(filename):
